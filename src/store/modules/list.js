@@ -5,6 +5,9 @@ export default {
     actions: {
 
     },
+    getters: {
+        list: state => state.list
+    },
     mutations: {
         init(state, list) {
             state.list = list;
@@ -25,8 +28,5 @@ export default {
                 Object.assign(sel, item);
             }
         }
-    },
-    getters: {
-        list: state => state.list
     }
 };
