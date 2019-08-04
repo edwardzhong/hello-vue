@@ -4,10 +4,10 @@ export const state = {
 }
 
 export const mutations = {
-    showModal: () => {
+    showModal() {
         state.modal.visible = true;
     },
-    closeModal: () => {
+    closeModal() {
         state.modal.visible = false;
     }
 }

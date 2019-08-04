@@ -8,17 +8,39 @@ module.exports = {
     entry: './src/main.js',
     output: {
         path: resolve(__dirname, 'dist'),
-        // publicPath: '/public/',//虚拟目录
+        publicPath: '/',//虚拟目录,解决组件加载路径是当前路径，导致路径错误的问题
         filename: '[name]-[hash].js'//输出文件添加hash
     },
-    optimization: { // 代替commonchunk, 代码分割
-        runtimeChunk: 'single',
-        splitChunks: {
+    optimization: { 
+        // runtimeChunk: 'single',
+        mergeDuplicateChunks: true, 
+        splitChunks: {// 代替commonchunk, 代码分割
+            chunks: 'async',
+            minSize: 30000,
+            maxSize: 0,
+            minChunks: 1,
+            maxAsyncRequests: 5,
+            maxInitialRequests: 3,
+            automaticNameDelimiter: '~',
+            name: true,
             cacheGroups: {
-                vendor: {
+                // vendor: {
+                //     test: /[\\/]node_modules[\\/]/,
+                //     name: 'vendors',
+                //     chunks: 'all'
+                // }
+                // 处理入口chunk
+                vendors: {
                     test: /[\\/]node_modules[\\/]/,
+                    chunks: 'initial',
                     name: 'vendors',
-                    chunks: 'all'
+                },
+                // 处理异步chunk
+                'async-vendors': {
+                    test: /[\\/]node_modules[\\/]/,
+                    minChunks: 2,
+                    chunks: 'async',
+                    name: 'async-vendors'
                 }
             }
         }
