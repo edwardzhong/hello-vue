@@ -1,7 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from './components/HelloWorld.vue'
-import List from './components/List.vue'
+// import Hello from './components/HelloWorld.vue'
+// import List from './components/List.vue'
+
+//异步加载
+const Hello = () => import('./components/HelloWorld.vue')
+const List = () => import('./components/List.vue')
 
 Vue.use(Router)
 
