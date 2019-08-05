@@ -1,7 +1,7 @@
 {
-  "name": "vue-template",
+  "name": "vue-project",
   "version": "1.0.0",
-  "description": "vue template",
+  "description": "webpack 4 for vue",
   "main": "app",
   "scripts": {
     "dist": "webpack --config webpack.prod.js",

@@ -1,5 +1,5 @@
-# hello vue
-this is vue web app template
+# Webpack 4 Quickstart For Vue
+### Based on the following
 * vue
 * vuex
 * vue-router
@@ -7,14 +7,14 @@ this is vue web app template
 * pug
 * scss
 
-## Project setup
+### Project setup
 ```
 npm install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+npm start
 ```
 
 ### Compiles and minifies for production
