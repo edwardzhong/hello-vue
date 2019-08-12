@@ -67,7 +67,13 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+                use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader',
+                { 
+                    loader: 'sass-resources-loader',
+                    options: {
+                        resources: [ resolve(__dirname,'public/base.scss') ]
+                    }
+                }]
             },
             {   /* 
                 当文件体积小于 limit 时，url-loader 把文件转为 Data URI 的格式内联到引用的地方

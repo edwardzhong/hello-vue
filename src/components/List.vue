@@ -107,6 +107,7 @@ button:not(:last-child) {
         line-height: 3;
         color: #fff;
         font-size: 18px;
+        @include nowrap;
     }
 }
 .form {
