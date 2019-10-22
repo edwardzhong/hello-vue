@@ -1,5 +1,5 @@
 <template lang="pug">
-	div.hello
+	.hello
 		h1  
 			router-link(to="/list") Go to list
 		h2 Welcome to Your Vue.js App

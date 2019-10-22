@@ -1,16 +1,16 @@
 <template lang="pug">
-div.content
+.content
     Dialog(:visible="showDailog" v-on="{confirm:confirmDialog,close:closeDialog}") 
         p delete data ?
     Popup(:show="showPop")
-        div.head 
+        .head 
             p edit data
-        div.form
-            div.control-group
+        .form
+            .control-group
                 input(type='text' placeholder='name' v-model="editItem.name")
-            div.control-group
+            .control-group
                 input(type='text' placeholder='amount' maxlength='12' v-model="editItem.num")
-            div.foot
+            .foot
                 button(class='button' v-on:click="closePop") cancal
                 button(class='button button-primary' v-on:click="update(editItem)") confirm
     h1

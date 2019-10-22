@@ -1,25 +1,24 @@
+import { get, post } from "../common/request";
 
-export const send = async () => {
-    class Foo {
-        constructor(x){
-            this.x = x;
+export const logout = ({ commit }) => {
+    return  get("/user/logout").then(res => {
+        if (res.data.ret) {
+            commit("logout");
         }
-        say(){
-            console.log(this.x);
-        }
-    }
-    const foo = new Foo(123); // class test
-    try {
-        return await new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve('async test');
-            }, 1000);
-        });
-    } catch (err) {
-        console.log(err);
-    }
+    }, err => {
+        commit('showError',err.message);
+    });
 }
 
-export const get = ()=>{
-    return 'get';
+export const updateUser = ({commit},form) => {
+    return post('/user/updateUserInfo',form).then(res=>{
+        if(res.data.ret){
+            commit('updateSelfInfo',form);
+            return true;
+        }
+        commit('showError',res.data.msg);
+        return false;
+    }, err => {
+        commit('showError',err.message);
+    });
 }
