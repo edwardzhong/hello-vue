@@ -13,6 +13,15 @@ module.exports = {
     },
     optimization: { 
         // runtimeChunk: 'single',
+        // splitChunks: {
+        //     cacheGroups: {
+        //         vendor: {
+        //             test: /[\\/]node_modules[\\/]/,
+        //             name: 'vendors',
+        //             chunks: 'all'
+        //         }
+        //     }
+        // }
         mergeDuplicateChunks: true, 
         splitChunks: {// 代替commonchunk, 代码分割
             chunks: 'async',
@@ -24,11 +33,6 @@ module.exports = {
             automaticNameDelimiter: '~',
             name: true,
             cacheGroups: {
-                // vendor: {
-                //     test: /[\\/]node_modules[\\/]/,
-                //     name: 'vendors',
-                //     chunks: 'all'
-                // }
                 // 处理入口chunk
                 vendors: {
                     test: /[\\/]node_modules[\\/]/,
