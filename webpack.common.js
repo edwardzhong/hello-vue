@@ -96,7 +96,7 @@ module.exports = {
     plugins: [
         new VueLoaderPlugin(),
         new CleanWebpackPlugin({
-            cleanOnceBeforeBuildPatterns: [resolve(__dirname, 'dist')]
+            cleanOnceBeforeBuildPatterns: ['dist']
         }),//生成新文件时，清空生出目录
         new HtmlWebpackPlugin({
             template: './public/index.html',//模版路径
