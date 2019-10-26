@@ -1,45 +1,50 @@
 const { resolve } = require('path')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const TerserJSPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { HotModuleReplacementPlugin } = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
     entry: './src/main.js',
     output: {
         path: resolve(__dirname, 'dist'),
-        publicPath: '/',//虚拟目录,解决组件加载路径是当前路径，导致路径错误的问题
+        publicPath: '/',
         filename: '[name]-[hash].js'//输出文件添加hash
     },
-    optimization: { 
+    optimization: {
+        minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})], 
         runtimeChunk: 'single',
-        // splitChunks: {
-        //     cacheGroups: {
-        //         vendor: {
-        //             test: /[\\/]node_modules[\\/]/,
-        //             name: 'vendors',
-        //             chunks: 'all'
-        //         }
-        //     }
-        // }
-        splitChunks: {// 代替commonchunk, 代码分割
-            minSize: 30000,
+        splitChunks: {
             maxSize: 300000,
-            name: true,
             cacheGroups: {
-                // 处理入口chunk
-                vendors: {
-                    test: /[\\/]node_modules[\\/]/,
+                vue: {
+                    test: /[\\/]node_modules[\\/](vue|vuex|vue-router)[\\/]/,
                     chunks: 'initial',
-                    name: 'vendors',
+                    priority: 10,
+                    name: 'base',
                 },
-                // 处理异步chunk
+                // vendors: {
+                //     test: /[\\/]node_modules[\\/]/,
+                //     chunks: 'initial',
+                //     name: 'vendors',
+                // },
                 'async-vendors': {
                     test: /[\\/]node_modules[\\/]/,
                     minChunks: 2,
                     chunks: 'async',
                     name: 'async-vendors'
+                },
+                styles: {
+                    name: 'styles',
+                    test: /\.css$/,
+                    chunks: 'all',
+                    enforce: true,
+                    priority: 20, 
                 }
             }
         }
@@ -61,23 +66,27 @@ module.exports = {
                 use: ['pug-plain-loader']
             },
             {
-                test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+                test: /\.css$/i,
+                use: [{
+                      loader: MiniCssExtractPlugin.loader,
+                      options: {
+                        hmr: devMode,
+                      },
+                    },
+                    'css-loader',
+                ],          
             },
             {
                 test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader',
-                { 
-                    loader: 'sass-resources-loader',
+                use: [{
+                    loader: MiniCssExtractPlugin.loader,
                     options: {
-                        resources: [ resolve(__dirname,'public/base.scss') ]
-                    }
-                }]
+                      hmr: devMode,
+                    },
+                },
+                'css-loader', 'postcss-loader', 'sass-loader']
             },
-            {   /* 
-                当文件体积小于 limit 时，url-loader 把文件转为 Data URI 的格式内联到引用的地方
-                当文件大于 limit 时，url-loader 会调用 file-loader, 把文件储存到输出目录，并把引用的文件路径改写成输出后的路径 
-                */
+            {
                 test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
                 use: [{
                     loader: 'url-loader',
@@ -91,9 +100,7 @@ module.exports = {
     plugins: [
         new BundleAnalyzerPlugin(),
         new VueLoaderPlugin(),
-        new CleanWebpackPlugin({
-            cleanOnceBeforeBuildPatterns: ['dist']
-        }),//生成新文件时，清空生出目录
+        new CleanWebpackPlugin([resolve(__dirname, 'dist')]),//生成新文件时，清空生出目录
         new HtmlWebpackPlugin({
             template: './public/index.html',//模版路径
             filename: 'index.html',//生成后的文件名,默认index.html
@@ -105,6 +112,11 @@ module.exports = {
                 removeScriptTypeAttributes:true,
                 removeStyleLinkTypeAttributes:true
              }
+        }),
+        new MiniCssExtractPlugin({
+            filename: devMode ? '[name].css' : '[name].[hash].css',
+            chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+            ignoreOrder: true,    
         }),
         new HotModuleReplacementPlugin()//HMR
     ]
