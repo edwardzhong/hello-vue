@@ -3,6 +3,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { HotModuleReplacementPlugin } = require('webpack')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
     entry: './src/main.js',
@@ -94,6 +95,7 @@ module.exports = {
         ]
     },
     plugins: [
+        new BundleAnalyzerPlugin(),
         new VueLoaderPlugin(),
         new CleanWebpackPlugin({
             cleanOnceBeforeBuildPatterns: ['dist']
