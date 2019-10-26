@@ -13,7 +13,7 @@ module.exports = {
         filename: '[name]-[hash].js'//输出文件添加hash
     },
     optimization: { 
-        // runtimeChunk: 'single',
+        runtimeChunk: 'single',
         // splitChunks: {
         //     cacheGroups: {
         //         vendor: {
@@ -23,15 +23,9 @@ module.exports = {
         //         }
         //     }
         // }
-        mergeDuplicateChunks: true, 
         splitChunks: {// 代替commonchunk, 代码分割
-            chunks: 'async',
             minSize: 30000,
-            maxSize: 0,
-            minChunks: 1,
-            maxAsyncRequests: 5,
-            maxInitialRequests: 3,
-            automaticNameDelimiter: '~',
+            maxSize: 300000,
             name: true,
             cacheGroups: {
                 // 处理入口chunk
