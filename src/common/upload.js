@@ -11,7 +11,7 @@ const putExtra = {
     params: {},
     mimeType: ["image/png", "image/jpeg", "image/jpg", "image/gif" ,"video/mp4"]
 };
-const qnUpload = (e, opt, callback, progress) => {
+const upload = (e, opt, callback, progress) => {
     const file = e.target.files[0];
     opt.type = opt.type || 'image';
     if (!file) {
@@ -36,40 +36,22 @@ const qnUpload = (e, opt, callback, progress) => {
         return false;
     }
 
-    upload(file, opt, callback, progress);
-};
-
-const upload = (file, opt, callback, progress) => {
     get("/tools/getToken").then(res => {
         if (!res.data.uptoken) {
             callback({ code: -1, data: res.data, message: "获取token失败" });
             return false;
         }
-        if (opt.type == 'image' && opt.compress) {
-            qiniu.compressImage(file, {
-                quality: 0.92,
-                noCompressIfLarger: true 
-            }).then(data => {
-                subscribe(data.dist);
-            });
-        } else {
-            subscribe(file);
-        }
 
-        function subscribe( data ) {
-            const observable = qiniu.upload( data, '' + new Date().getTime(), res.data.uptoken, null, config ); //key设置为 null/undefined, 则文件名会以 hash 值作为资源名
-            observable.subscribe(
-                ret => {
-                    if(!progress) return;
-                    progress(Math.floor(ret.total.percent));
-                },
-                callback,
-                callback
-            );
-        };
+        const observable = qiniu.upload( file, '' + new Date().getTime(), res.data.uptoken, null, config ); //key设置为 null/undefined, 则文件名会以 hash 值作为资源名
+        observable.subscribe(
+            ret => {
+                if(!progress) return;
+                progress(Math.floor(ret.total.percent));
+            },
+            callback,
+            callback
+        );
     }, err => {
         callback(err);
     });
 };
-
-export default qnUpload;

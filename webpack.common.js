@@ -16,6 +16,11 @@ module.exports = {
         publicPath: '/',
         filename: '[name]-[hash].js'//输出文件添加hash
     },
+    resolve: {
+        alias: {
+            '@': resolve(__dirname, 'src'),
+        }
+    },
     optimization: {
         minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})], 
         runtimeChunk: 'single',
