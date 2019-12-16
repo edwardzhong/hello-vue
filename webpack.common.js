@@ -20,13 +20,14 @@ module.exports = {
         alias: {
             '@': resolve(__dirname, 'src'),
         },
-        extensions: ['.ts', '.vue', '.json', '.js']
+        extensions: ['.ts', '.vue', '.js', '.json']
     },
     optimization: {
         minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})], 
         runtimeChunk: 'single',
         splitChunks: {
-            maxSize: 300000,
+            minSize:100000,
+            maxSize:300000,
             cacheGroups: {
                 vue: {
                     test: /[\\/]node_modules[\\/](vue|vuex|vue-router)[\\/]/,
@@ -62,18 +63,26 @@ module.exports = {
                 exclude: /node_modules/,
                 use:['vue-loader']
             },
+            // {
+            //     test: /\.ts$/,
+            //     loader: "ts-loader",
+            //     options: { appendTsSuffixTo: [/\.vue$/] }
+            // },
+            {
+                test: /\.ts$/,
+                exclude: /node_modules/,
+                use: [
+                    'babel-loader',
+                    {
+                        loader:'ts-loader',
+                        options: { appendTsSuffixTo: [/\.vue$/] }
+                    }
+                ]
+            },
             {
                 test: /\.js?$/,
                 exclude: /node_modules/,
                 use: ['babel-loader']//'eslint-loader'
-            },
-            {
-                test: /\.ts$/,
-                exclude: /node_modules/,
-                use: ['babel-loader',{
-                    loader:'ts-loader',
-                    options: { appendTsSuffixTo: [/\.vue$/] }
-                }]
             },
             {
                 test: /\.pug$/,

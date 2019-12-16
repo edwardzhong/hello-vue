@@ -20,5 +20,5 @@ npm start
 
 ### Compiles and minifies for production
 ```
-npm run dist
+npm run build
 ```
