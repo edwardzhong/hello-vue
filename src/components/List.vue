@@ -12,7 +12,7 @@
                 input(type='text' placeholder='amount' maxlength='12' v-model="editItem.num")
             .foot
                 button(class='button' v-on:click="closePop") cancal
-                button(class='button button-primary' v-on:click="update(editItem)") confirm
+                button(class='button button-primary' v-on:click="updateItem(editItem)") confirm
     h1
         router-link(to="/") Go to home
     table(class="table table-striped table-justified")
@@ -30,9 +30,9 @@
                     button(class="button button-success" v-on:click="openDialog(i.id)") delete
 </template>
 <script lang="ts">
-import { TItem, TList } from "@/types/context";
+import { TItem, TList, Fn } from "../types/context";
 import { Vue, Component } from 'vue-property-decorator'
-import { Getter } from 'vuex-class'
+import { Getter, Mutation } from 'vuex-class'
 import Dialog from "./common/dialog.vue";
 import Popup from "./common/popup.vue";
 
@@ -48,6 +48,11 @@ export default class List extends Vue {
     delID = 0
     editItem = {}
 
+    @Mutation showModal:Fn
+    @Mutation closeModal:Fn
+    @Mutation remove:Fn
+    @Mutation update:Fn
+    @Mutation init:Fn
     @Getter list:TList
     // @Getter('list') getterList:TList
     // get list(){
@@ -56,7 +61,7 @@ export default class List extends Vue {
 
     created() {
         if (this.list.length) return;
-        this.$store.commit("init", [
+        this.init([
             { id: 1, name: "Chuck Norris", num: 10000 },
             { id: 2, name: "Bruce Lee", num: 9000 },
             { id: 3, name: "Jackie Chan", num: 7000 },
@@ -66,37 +71,36 @@ export default class List extends Vue {
 
     // @Emit('showModal')
     openDialog(id:number) {
-        this.$store.commit("showModal");
+        this.showModal();
         this.showDailog = true;
         this.delID = id;
     }
 
     confirmDialog() {
-        this.$store.commit("remove", this.delID);
+        this.remove(this.delID);
         this.closeDialog();
     }
 
     closeDialog() {
-        this.$store.commit("closeModal");
+        this.closeModal();
         this.showDailog = false;
     }
 
-    // @Emit('showModal')
     openPop(item:TItem) {
-        this.$store.commit("showModal");
+        this.showModal();
         this.showPop = true;
-        this.editItem = Object.assign({},item);//将数据复制一份，而不是引用原数据
+        this.editItem = Object.assign({}, item);//将数据复制一份，而不是引用原数据
     }
 
-    update(item:TItem) {
-        this.$store.commit("update", item);
+    updateItem(item:TItem) {
+        this.update(item);
         this.closePop();
     }
 
     closePop() {
         this.showPop = false;
         setTimeout(() => {
-            this.$store.commit("closeModal");
+            this.closeModal();
         }, 300);
     }
 }

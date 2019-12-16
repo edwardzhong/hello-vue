@@ -1,9 +1,11 @@
-interface fn {
+interface DisFn {
     (type: string, arg?:any):void
 }
-
+interface Fn {
+    (arg?:any):void
+}
 interface Dispatch {
-    commit:fn
+    commit:DisFn
 }
 
 type selfInfo = {
@@ -30,6 +32,7 @@ interface ListState {
 }
 
 export {
+    Fn,
     TItem,
     TList,
     ListState,
