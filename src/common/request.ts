@@ -15,7 +15,7 @@ axios.interceptors.request.use(config => {
         // if ( obj && obj.token) {
         //     Object.assign(params, { token: obj.token });
         // }
-        if (obj.token) {
+        if (obj && obj.token) {
             config.headers.Authorization = 'Bearer ' + obj.token;
         }
     }
