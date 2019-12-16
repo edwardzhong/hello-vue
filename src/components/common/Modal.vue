@@ -1,15 +1,15 @@
 <template lang="pug">
   .modal(v-if="visible")
 </template>
-<script>
-export default {
-    name: "modal",
-    computed: {
-        visible: function() {
-            return this.$store.getters.visible;
-        }
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
+
+@Component
+export default class Modal extends Vue {
+    get visible () {
+        return this.$store.getters.visible;
     }
-};
+}
 </script>
 <style>
 .modal {

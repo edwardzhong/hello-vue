@@ -6,6 +6,7 @@
 * webpack 4
 * pug
 * scss
+* typescript
 
 ### Project setup
 ```

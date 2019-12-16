@@ -1,4 +1,6 @@
-let selfInfo = {};
+import { BaseState } from "@/types/context";
+
+let selfInfo = {id:''};
 const info = localStorage.getItem('selfInfo');
 if (!info || info === 'undefined') {
     localStorage.clear();
@@ -6,7 +8,7 @@ if (!info || info === 'undefined') {
     selfInfo = JSON.parse(info) || {};
 }
 
-export const state = {
+export const state:BaseState = {
     selfInfo: selfInfo,
     modal: { visible: false },
     infoTip: { visible:false, isError:false, txt:'' },
@@ -20,17 +22,17 @@ export const state = {
 
 export const mutations = {
     logout(){
-        state.selfInfo = {};
+        state.selfInfo = { id:''};
         localStorage.removeItem('selfInfo');
     },
-    setListInfo(state, payload){
-        state.listInfo = Object.assign(state.listInfo,payload);
+    setListInfo(state:BaseState, payload:object){
+        state.listInfo = Object.assign(state.listInfo, payload);
     },
-    setSelfInfo(state, payload) {
+    setSelfInfo(state:BaseState, payload:{id:string}) {
         state.selfInfo = payload;
         localStorage.setItem("selfInfo", JSON.stringify(payload));
     },
-    updateSelfInfo(state, payload) {
+    updateSelfInfo(state:BaseState, payload:object) {
         state.selfInfo = Object.assign(state.selfInfo, payload);
         localStorage.setItem("selfInfo", JSON.stringify(state.selfInfo));
     },
@@ -40,13 +42,13 @@ export const mutations = {
     closeModal() {
         state.modal.visible = false;
     },
-    showError(state,txt){
+    showError(state:BaseState,txt:string){
         state.infoTip = { visible:true, isError:true, txt:txt } 
         setTimeout(() => {
             state.infoTip.visible = false;
         }, 2000);
     },
-    showSucc(state,txt){
+    showSucc(state:BaseState,txt:string){
         state.infoTip = { visible:true, isError:false, txt:txt }; 
         setTimeout(() => {
             state.infoTip.visible = false;

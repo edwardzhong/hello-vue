@@ -2,13 +2,16 @@
     .popup(:class="{active:show}")
         slot content
 </template>
-<script>
-export default {
-    name: "popup",
+<script lang="ts">
+// import Vue from "vue";
+import { Vue, Component } from 'vue-property-decorator'
+
+@Component({
     props: {
         show: Boolean
     }
-};
+})
+export default class Popup extends Vue { };
 </script>
 <style lang="scss" scoped>
 .popup {

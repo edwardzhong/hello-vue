@@ -29,21 +29,27 @@
                     button(class="button button-primary" v-on:click="openPop(i)") edit 
                     button(class="button button-success" v-on:click="openDialog(i.id)") delete
 </template>
-<script>
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
 import Dialog from "./common/dialog.vue";
 import Popup from "./common/popup.vue";
 
-export default {
-    name: "list",
+@Component({
     components: {
         Dialog,
         Popup
-    },
-    computed: {
-        list: function() {
-            return this.$store.getters.list;
-        }
-    },
+    }
+})
+export default class List extends Vue {
+    showDailog = false
+    showPop = false
+    delID = 0
+    editItem = {}
+
+    get list(){
+        return this.$store.getters.list
+    }
+    
     created() {
         if (this.list.length) return;
         this.$store.commit("init", [
@@ -52,46 +58,42 @@ export default {
             { id: 3, name: "Jackie Chan", num: 7000 },
             { id: 4, name: "Jet Li", num: 8000 }
         ]);
-    },
-    data() {
-        return {
-            showDailog: false,
-            showPop: false,
-            delID: 0,
-            editItem: {}
-        };
-    },
-    methods: {
-        openDialog(id) {
-            this.$store.commit("showModal");
-            this.showDailog = true;
-            this.delID = id;
-        },
-        confirmDialog() {
-            this.$store.commit("remove", this.delID);
-            this.closeDialog();
-        },
-        closeDialog() {
-            this.$store.commit("closeModal");
-            this.showDailog = false;
-        },
-        openPop(item) {
-            this.$store.commit("showModal");
-            this.showPop = true;
-            this.editItem = Object.assign({},item);//将数据复制一份，而不是引用原数据
-        },
-        update(item) {
-            this.$store.commit("update", item);
-            this.closePop();
-        },
-        closePop() {
-            this.showPop = false;
-            setTimeout(() => {
-                this.$store.commit("closeModal");
-            }, 300);
-        }
     }
-};
+
+    openDialog(id:number) {
+        this.$store.commit("showModal");
+        this.showDailog = true;
+        this.delID = id;
+    }
+
+    confirmDialog() {
+        this.$store.commit("remove", this.delID);
+        this.closeDialog();
+    }
+
+    closeDialog() {
+        this.$store.commit("closeModal");
+        this.showDailog = false;
+    }
+
+    openPop(item:object) {
+        this.$store.commit("showModal");
+        this.showPop = true;
+        this.editItem = Object.assign({},item);//将数据复制一份，而不是引用原数据
+    }
+
+    update(item:object) {
+        this.$store.commit("update", item);
+        this.closePop();
+    }
+
+    closePop() {
+        this.showPop = false;
+        setTimeout(() => {
+            this.$store.commit("closeModal");
+        }, 300);
+    }
+}
 </script>
 <style lang="scss" scoped>
 .content {
@@ -104,6 +106,8 @@ button:not(:last-child) {
 .head {
     background: #0077e6;
     p {
+        margin:0;
+        padding-left:20px;
         line-height: 3;
         color: #fff;
         font-size: 18px;

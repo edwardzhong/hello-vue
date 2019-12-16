@@ -6,13 +6,15 @@
         a(href="javascript:;" v-on:click="$emit('close')") cancel
         a(href="javascript:;" v-on:click="$emit('confirm')") yes
 </template>
-<script>
-export default {
-    name:'dialog',
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
+
+@Component({
     props: {
         visible: Boolean
     }
-};
+})
+export default class Dialog extends Vue { };
 </script>
 <style lang="scss" scoped>
 .dialog {

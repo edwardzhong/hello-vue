@@ -1,5 +1,5 @@
 const { resolve } = require('path')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const TerserJSPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -10,7 +10,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
-    entry: './src/main.js',
+    entry: './src/main.ts',
     output: {
         path: resolve(__dirname, 'dist'),
         publicPath: '/',
@@ -19,7 +19,8 @@ module.exports = {
     resolve: {
         alias: {
             '@': resolve(__dirname, 'src'),
-        }
+        },
+        extensions: ['.ts', '.vue', '.json', '.js']
     },
     optimization: {
         minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})], 
@@ -67,16 +68,24 @@ module.exports = {
                 use: ['babel-loader']//'eslint-loader'
             },
             {
+                test: /\.ts$/,
+                exclude: /node_modules/,
+                use: ['babel-loader',{
+                    loader:'ts-loader',
+                    options: { appendTsSuffixTo: [/\.vue$/] }
+                }]
+            },
+            {
                 test: /\.pug$/,
                 use: ['pug-plain-loader']
             },
             {
                 test: /\.css$/i,
                 use: [{
-                      loader: MiniCssExtractPlugin.loader,
-                      options: {
-                        hmr: devMode,
-                      },
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            hmr: devMode,
+                        },
                     },
                     'css-loader',
                 ],          
@@ -86,10 +95,16 @@ module.exports = {
                 use: [{
                     loader: MiniCssExtractPlugin.loader,
                     options: {
-                      hmr: devMode,
+                        hmr: devMode,
                     },
                 },
-                'css-loader', 'postcss-loader', 'sass-loader']
+                'css-loader', 'postcss-loader', 'sass-loader',
+                { 
+                    loader: 'sass-resources-loader',
+                    options: {
+                        resources: [ resolve(__dirname,'public/base.scss') ]
+                    }
+                }]
             },
             {
                 test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
@@ -105,7 +120,7 @@ module.exports = {
     plugins: [
         new BundleAnalyzerPlugin(),
         new VueLoaderPlugin(),
-        new CleanWebpackPlugin([resolve(__dirname, 'dist')]),//生成新文件时，清空生出目录
+        new CleanWebpackPlugin(),//生成新文件时，清空生出目录
         new HtmlWebpackPlugin({
             template: './public/index.html',//模版路径
             filename: 'index.html',//生成后的文件名,默认index.html

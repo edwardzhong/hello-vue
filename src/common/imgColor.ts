@@ -1,7 +1,9 @@
 const canvas = document.createElement("canvas");
 const ctx = canvas.getContext("2d");
 
-const getImgColor = list => {
+type List = Array<{cover:string;bgcolor:string;}>|[]
+
+const getImgColor = (list:List):Promise<List> => {
     if (!list || !list.length) {
         return Promise.resolve([]);
     }
@@ -9,7 +11,7 @@ const getImgColor = list => {
     let height = 0;
     let i = list.length;
     
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
         list.forEach(l => {
             if(!l.cover){
                 l.bgcolor='#555';

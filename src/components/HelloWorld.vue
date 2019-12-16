@@ -30,10 +30,12 @@
 				a(href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener") awesome-vue
 </template>
 
-<script>
-export default {
-    name: "HelloWorld"
-};
+<script lang="ts">
+import Vue from 'vue'
+import Component from 'vue-class-component'
+
+@Component
+export default class Hello extends Vue { };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>

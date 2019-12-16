@@ -4,12 +4,14 @@
 		img(alt="Vue logo" src="./assets/logo.png")
 		router-view
 </template>
-<script>
-	import Modal from "./components/common/Modal.vue";
-	export default {
-		name: "app",
-		components: { Modal }
-	};
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
+import Modal from "@/components/common/Modal.vue";
+
+@Component({
+	components: { Modal }
+})
+export default class App extends Vue{ }
 </script>
 <style type="text/css">
 #app {
