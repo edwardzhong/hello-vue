@@ -1,9 +1,11 @@
 import { TItem, TList, ListState } from "@/types/context";
 
+const state:ListState = {
+    list:[]
+};
+
 export default {
-    state: {
-        list: []
-    },
+    state,
     actions: {
 
     },

@@ -30,7 +30,9 @@
                     button(class="button button-success" v-on:click="openDialog(i.id)") delete
 </template>
 <script lang="ts">
+import { TItem, TList } from "@/types/context";
 import { Vue, Component } from 'vue-property-decorator'
+import { Getter } from 'vuex-class'
 import Dialog from "./common/dialog.vue";
 import Popup from "./common/popup.vue";
 
@@ -45,12 +47,14 @@ export default class List extends Vue {
     showPop = false
     delID = 0
     editItem = {}
-
+    @Getter('list') getterList:TList
+ 
     get list(){
-        return this.$store.getters.list
+        return this.getterList
     }
     
     created() {
+        // this.getterList
         if (this.list.length) return;
         this.$store.commit("init", [
             { id: 1, name: "Chuck Norris", num: 10000 },
@@ -76,13 +80,13 @@ export default class List extends Vue {
         this.showDailog = false;
     }
 
-    openPop(item:object) {
+    openPop(item:TItem) {
         this.$store.commit("showModal");
         this.showPop = true;
         this.editItem = Object.assign({},item);//将数据复制一份，而不是引用原数据
     }
 
-    update(item:object) {
+    update(item:TItem) {
         this.$store.commit("update", item);
         this.closePop();
     }

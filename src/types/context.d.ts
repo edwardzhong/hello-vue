@@ -6,8 +6,11 @@ interface Dispatch {
     commit:fn
 }
 
+type selfInfo = {
+    id:string;
+}
 interface BaseState {
-    selfInfo: { id:string };
+    selfInfo: selfInfo;
     modal: { visible: boolean };
     infoTip: { visible:boolean; isError:boolean; txt:string; };
     listInfo: {
