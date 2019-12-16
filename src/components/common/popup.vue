@@ -3,15 +3,13 @@
         slot content
 </template>
 <script lang="ts">
-// import Vue from "vue";
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 
-@Component({
-    props: {
-        show: Boolean
-    }
-})
-export default class Popup extends Vue { };
+@Component
+export default class Popup extends Vue { 
+    @Prop()
+    show = false
+};
 </script>
 <style lang="scss" scoped>
 .popup {

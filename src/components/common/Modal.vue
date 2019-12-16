@@ -3,12 +3,11 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import { Getter } from 'vuex-class'
 
 @Component
 export default class Modal extends Vue {
-    get visible () {
-        return this.$store.getters.visible;
-    }
+    @Getter visible:boolean
 }
 </script>
 <style>

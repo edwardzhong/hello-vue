@@ -47,14 +47,14 @@ export default class List extends Vue {
     showPop = false
     delID = 0
     editItem = {}
-    @Getter('list') getterList:TList
- 
-    get list(){
-        return this.getterList
-    }
-    
+
+    @Getter list:TList
+    // @Getter('list') getterList:TList
+    // get list(){
+    //     return this.getterList
+    // }
+
     created() {
-        // this.getterList
         if (this.list.length) return;
         this.$store.commit("init", [
             { id: 1, name: "Chuck Norris", num: 10000 },
@@ -64,6 +64,7 @@ export default class List extends Vue {
         ]);
     }
 
+    // @Emit('showModal')
     openDialog(id:number) {
         this.$store.commit("showModal");
         this.showDailog = true;
@@ -80,6 +81,7 @@ export default class List extends Vue {
         this.showDailog = false;
     }
 
+    // @Emit('showModal')
     openPop(item:TItem) {
         this.$store.commit("showModal");
         this.showPop = true;
