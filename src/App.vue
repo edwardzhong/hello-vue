@@ -1,9 +1,13 @@
 <template lang="pug">
+	mixin Icon(id, classname)
+		svg.icon(class=classname aria-hidden="true")
+			use(xlink:href="#icon-"+id)
 	#app
 		Modal
 		img(alt="Vue logo" src="./assets/logo.png")
-		svg.icon.logo(aria-hidden="true")
-			use(xlink:href="#icon-LOGO")
+		div
+			+Icon('Logo','logo')
+			+Icon('Logo2','logo')
 		router-view
 </template>
 <script lang="ts">
