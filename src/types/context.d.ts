@@ -1,41 +1,27 @@
-interface DisFn {
-    (type: string, arg?:any):void
-}
-interface Fn {
-    (arg?:any):void
-}
-interface Dispatch {
-    commit:DisFn
-}
+type Fn = (arg?: any) => void
 
 type selfInfo = {
-    id:string;
+    id: string;
 }
-interface BaseState {
+
+interface RootState {
     selfInfo: selfInfo;
     modal: { visible: boolean };
-    infoTip: { visible:boolean; isError:boolean; txt:string; };
-    listInfo: {
-        height:number; 
-        rows:number;
-        navIndex:number;
-        list:any[]; 
-    }
+    msgInfo: { visible: boolean; isError: boolean; txt: string; };
 }
 
-type TItem = { id: number; name: string; num:number; };
+type UserItem = { id: number; name: string; num: number; };
 
-type TList = Array<TItem>
+type UserList = Array<UserItem>
 
-interface ListState {
-    list: TList;
+interface userState {
+    list: UserList;
 }
 
 export {
     Fn,
-    TItem,
-    TList,
-    ListState,
-    BaseState,
-    Dispatch
+    UserItem,
+    UserList,
+    userState,
+    RootState,
 }

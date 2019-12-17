@@ -2,6 +2,8 @@
 	#app
 		Modal
 		img(alt="Vue logo" src="./assets/logo.png")
+		svg.icon.logo(aria-hidden="true")
+			use(xlink:href="#icon-LOGO")
 		router-view
 </template>
 <script lang="ts">
@@ -18,5 +20,10 @@ export default class App extends Vue{ }
   height: 100%;
   width: 100%;
   min-width: 1000px;
+}
+.logo{
+	width: 100px;
+	height: 100px;
+	color: #000;
 }
 </style>

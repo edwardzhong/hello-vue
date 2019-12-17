@@ -3,16 +3,22 @@
     .body
         slot title
     .foot
-        a(href="javascript:;" v-on:click="$emit('close')") cancel
-        a(href="javascript:;" v-on:click="$emit('confirm')") yes
+        a(href="javascript:;" @click="close") cancel
+        a(href="javascript:;" @click="confirm") yes
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
 
 @Component
 export default class Dialog extends Vue { 
     @Prop()
     visible:boolean
+
+    @Emit()
+    close(){ }
+
+    @Emit()
+    confirm(){ }
 };
 </script>
 <style lang="scss" scoped>
