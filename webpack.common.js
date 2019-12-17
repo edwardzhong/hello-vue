@@ -111,7 +111,7 @@ module.exports = {
                 { 
                     loader: 'sass-resources-loader',
                     options: {
-                        resources: [ resolve(__dirname,'public/base.scss') ]
+                        resources: [ resolve(__dirname,'src/base.scss') ]
                     }
                 }]
             },
