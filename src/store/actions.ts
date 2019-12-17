@@ -1,7 +1,6 @@
 import { get, post } from "@/common/request";
 import { Dispatch } from "@/types/context";
 
-
 export const logout = async ({ commit }:Dispatch) => {
     try {
         const res = await get("/user/logout", {});
