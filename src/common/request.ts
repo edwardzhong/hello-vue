@@ -1,6 +1,6 @@
 import axios from 'axios'
 import configs from '@/config/app'
-import { AxiosFun } from '@/types/request'
+import { AxiosFun } from '@/types/context'
 
 axios.defaults.baseURL = configs.url;
 axios.defaults.timeout = 20000;

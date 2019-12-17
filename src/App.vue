@@ -20,10 +20,10 @@ export default class App extends Vue{ }
   height: 100%;
   width: 100%;
   min-width: 1000px;
+  text-align: center;
 }
 .logo{
 	width: 100px;
 	height: 100px;
-	color: #000;
 }
 </style>
