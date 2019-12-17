@@ -43,7 +43,7 @@ const userInfo = namespace("user");
 		Popup
 	}
 })
-export default class List extends Vue {
+export default class Users extends Vue {
 	showDailog = false;
 	showPop = false;
 	delID = 0;

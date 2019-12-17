@@ -1,7 +1,7 @@
 <template lang="pug">
 	.hello
 		h1  
-			router-link(to="/list") Go to list
+			router-link(to="/users") Go to user list
 		h2 Welcome to Your Vue.js App
 		p For a guide and recipes on how to configure / customize this project, check out
 		h3 Essential Links
@@ -35,7 +35,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 @Component
-export default class Hello extends Vue { };
+export default class Home extends Vue { };
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>

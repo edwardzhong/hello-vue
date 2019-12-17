@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import Hello from './components/HelloWorld.vue'
-// import List from './components/List.vue'
+// import Home from './components/home.vue'
+// import Users from './components/users.vue'
 
 //异步加载
-const Hello = () => import('./components/HelloWorld.vue')
-const List = () => import('./components/List.vue')
+const Home = () => import('./components/home.vue')
+const Users = () => import('./components/users.vue')
 
 Vue.use(Router)
 
@@ -13,11 +13,11 @@ Vue.use(Router)
 const routes = [{
     path: '/',
     name: 'home',
-    component: Hello
+    component: Home
 }, {
-    path: '/list',
-    name: 'list',
-    component: List
+    path: '/users',
+    name: 'users',
+    component: Users
 },
 { path: '*', redirect: '/'}]
 
