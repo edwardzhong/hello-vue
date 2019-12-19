@@ -1,4 +1,4 @@
-import { UserItem, UserList, userState, RootState } from "type";
+import { UserItem, UserList, userState, RootState } from "@/type";
 import { MutationTree, GetterTree, Module } from 'vuex';
 
 const state:userState = {

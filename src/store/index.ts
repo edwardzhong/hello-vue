@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex,{ Store, StoreOptions} from 'vuex'
-import { RootState } from 'type'
+import { RootState } from '@/type'
 import { get, post } from "@/common/request";
 import user from './modules/user'
 
