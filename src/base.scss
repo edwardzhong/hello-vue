@@ -1,23 +1,39 @@
-$font-color: #555;
-$blue: hsl(205, 87%, 49%);
-$gray: #999;
+$font-color: #151f2a;
+$blue: #007aff;
+$blue-deep: #3b5898;
+$green: #32bb01;
+$gray: #dcdfe6;
+$purple: #752e95;
 
-@mixin imagebg {
-    background-repeat: no-repeat;
-    background-size:contain;
-    background-position: 50%;
+@mixin imgbg {
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 50%;
 }
 
 @mixin nowrap {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;    
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
-@mixin nowrapTwo{
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
+@mixin nowrapTwo {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
+}
+
+@mixin layout {
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 90%;
+    min-width: 1000px;
+}
+
+@mixin sm {
+	@media screen and (max-width: 768px) {
+		@content;
+	}
 }
