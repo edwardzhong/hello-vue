@@ -6,17 +6,18 @@ import user from './modules/user'
 
 Vue.use(Vuex)
 
-let selfInfo = { id:''};
-const info = localStorage.getItem('selfInfo');
+let loginInfo = { id:''};
+const info = localStorage.getItem('loginInfo');
 if (!info || info === 'undefined') {
     localStorage.clear();
 } else {
-    selfInfo = JSON.parse(info) || {};
+    loginInfo = JSON.parse(info) || {};
 }
 
 const store: StoreOptions<RootState> = {
 	state:{
-		selfInfo: selfInfo,
+		loginInfo,
+		selfInfo:{ id: ''},
 		modal: { visible: false },
 		msgInfo: { visible:false, isError:false, txt:'' },
 	},
@@ -26,8 +27,12 @@ const store: StoreOptions<RootState> = {
 	},
 	mutations:{
 		logout(state){
-			state.selfInfo = { id:''};
-			localStorage.removeItem('selfInfo');
+			state.loginInfo = { id:''};
+			localStorage.removeItem('loginInfo');
+		},
+		setLoginInfo(state, payload:{id:string}) {
+			state.selfInfo = payload;
+			localStorage.setItem("loginInfo", JSON.stringify(payload));
 		},
 		setSelfInfo(state, payload:{id:string}) {
 			state.selfInfo = payload;
@@ -42,46 +47,23 @@ const store: StoreOptions<RootState> = {
 		},
 		closeModal(state) {
 			state.modal.visible = false;
-		},
-		showError(state, txt:string){
-			state.msgInfo = { visible:true, isError:true, txt:txt } 
-			setTimeout(() => {
-				state.msgInfo.visible = false;
-			}, 2000);
-		},
-		showSucc(state,txt:string){
-			state.msgInfo = { visible:true, isError:false, txt:txt }; 
-			setTimeout(() => {
-				state.msgInfo.visible = false;
-			}, 2000);
 		}
 	},
 	actions:{
 		async logout ({ commit }) {
-			try {
-				const res = await get("/user/logout", {});
-				if (res.data.code) {
-					commit("logout");
-				}
+			const data = await get("user/logout", {});
+			if (data.code) {
+				commit("logout");
 			}
-			catch (err) {
-				commit('showError', err.message);
-			}
+			return data;
 		},
 		async updateUser ({ commit },form:object) {
-			try {
-				const res = await post('/user/updateUserInfo', form);
-				if (res.data.code) {
-					commit('updateSelfInfo', form);
-					return true;
-				}
-				commit('showError', res.data.msg);
-				return false;
+			const data = await post('user/updateUserInfo', form);
+			if (data.code) {
+				commit('updateSelfInfo', form);
+				return true;
 			}
-			catch (err) {
-				commit('showError', err.message);
-				return false;
-			}
+			return false;
 		}
 	},
 	modules: {

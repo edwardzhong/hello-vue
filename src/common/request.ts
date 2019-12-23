@@ -8,7 +8,7 @@ axios.defaults.withCredentials = true;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 
 axios.interceptors.request.use(config => {
-    const info = localStorage.getItem("selfInfo");
+    const info = localStorage.getItem("loginInfo");
     const params = config.method == "get" ? config.params || {} : config.data || {};
     if (info) {
         const obj = JSON.parse(info);
@@ -35,8 +35,39 @@ axios.interceptors.request.use(config => {
 //     return res.data;
 // });
 
-export const get: AxiosFun = (url, param) => axios.get(url, { params: param });
-export const post: AxiosFun = (url, param) => axios.post(url, param);
-export const put: AxiosFun = (url, param) => axios.put(url, param);
-export const del: AxiosFun = (url, param) => axios.delete(url, { data: param });
+export const get: AxiosFun = (url, param) => {
+    return axios.get(url, { params: param }).then(res => {
+        return res.data;
+    }, (err: Error) => {
+        // Message.error(err.message);
+        return { code: -1 };
+    });
+}
+
+export const post: AxiosFun = (url, param) => {
+    return axios.post(url, param).then(res => {
+        return res.data;
+    }, (err: Error) => {
+        // Message.error(err.message);
+        return { code: -1 };
+    });
+}
+
+export const put: AxiosFun = (url, param) => {
+    return axios.put(url, param).then(res => {
+        return res.data;
+    }, (err: Error) => {
+        // Message.error(err.message);
+        return { code: -1 };
+    });
+}
+
+export const del: AxiosFun = (url, param) => {
+    return axios.delete(url, { data: param }).then(res => {
+        return res.data;
+    }, (err: Error) => {
+        // Message.error(err.message);
+        return { code: -1 };
+    });
+}
 

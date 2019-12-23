@@ -1,15 +1,15 @@
-import { UserItem, UserList, userState, RootState } from "@/type";
+import { UserItem, UserList, UserState, RootState } from "@/type";
 import { MutationTree, GetterTree, Module } from 'vuex';
 
-const state:userState = {
+const state:UserState = {
     list:[]
 };
 
-const getters:GetterTree<userState,RootState> = {
+const getters:GetterTree<UserState,RootState> = {
     list: (state) => state.list
 };
 
-const mutations: MutationTree<userState> = {
+const mutations: MutationTree<UserState> = {
     init(state, list:UserList) {
         state.list = list;
     },
@@ -32,7 +32,7 @@ const mutations: MutationTree<userState> = {
 }
 
 
-const user: Module<userState, RootState> = {
+const user: Module<UserState, RootState> = {
     namespaced: true,
     state,
     getters,

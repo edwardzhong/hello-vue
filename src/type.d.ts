@@ -1,10 +1,13 @@
-import { AxiosResponse } from 'axios';
 
-type selfInfo = {
+type LoginInfo = {
+    id: string;
+}
+type SelfInfo = {
     id: string;
 }
 interface RootState {
-    selfInfo: selfInfo;
+    loginInfo: LoginInfo;
+    selfInfo: SelfInfo;
     modal: { visible: boolean };
     msgInfo: { visible: boolean; isError: boolean; txt: string; };
 }
@@ -17,7 +20,7 @@ type UserItem = {
 
 type UserList = Array<UserItem>
 
-interface userState {
+interface UserState {
     list: UserList;
 }
 
@@ -29,7 +32,7 @@ type ResData = {
     msg: string;
 }
 interface AxiosFun {
-    (url: string, param?: any): Promise<AxiosResponse<ResData>>
+    (url: string, param?: any): Promise<ResData>
 }
 
 export {
@@ -37,6 +40,6 @@ export {
     AxiosFun,
     UserItem,
     UserList,
-    userState,
+    UserState,
     RootState,
 }
