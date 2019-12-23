@@ -29,7 +29,7 @@ type ResData = {
     msg: string;
 }
 interface AxiosFun {
-    (url: string, param: any): Promise<AxiosResponse<ResData>>
+    (url: string, param?: any): Promise<AxiosResponse<ResData>>
 }
 
 export {

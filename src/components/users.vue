@@ -30,9 +30,9 @@
                     button(class="button button-success" v-on:click="openDialog(i.id)") delete
 </template>
 <script lang="ts">
-import { Vue, Component, Watch } from "vue-property-decorator";
+import { Vue, Component, Watch, Provide } from "vue-property-decorator";
 import { Mutation, Getter, namespace } from "vuex-class";
-import { UserItem, UserList, Fn } from "../types/context";
+import { UserItem, UserList, Fn } from "../type";
 import Dialog from "./common/dialog.vue";
 import Popup from "./common/popup.vue";
 
@@ -44,10 +44,10 @@ const userInfo = namespace("user");
 	}
 })
 export default class Users extends Vue {
-	showDailog = false;
-	showPop = false;
-	delID = 0;
-	editItem = {};
+	@Provide() showDailog = false;
+	@Provide() showPop = false;
+	@Provide() delID = 0;
+	@Provide() editItem = {};
 
     @Mutation showModal: Fn;
     @Mutation closeModal: Fn;
