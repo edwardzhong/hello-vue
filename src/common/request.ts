@@ -1,6 +1,6 @@
 import axios from 'axios'
 import configs from '@/config/app'
-import { AxiosFun } from '@/type'
+import { AxiosFn } from '@/type'
 
 axios.defaults.baseURL = configs.url;
 axios.defaults.timeout = 20000;
@@ -35,39 +35,39 @@ axios.interceptors.request.use(config => {
 //     return res.data;
 // });
 
-export const get: AxiosFun = (url, param) => {
+export const get: AxiosFn = (url, param) => {
     return axios.get(url, { params: param }).then(res => {
         return res.data;
     }, (err: Error) => {
         // Message.error(err.message);
-        return { code: -1 };
+        return { code: -1, msg: err.message };
     });
 }
 
-export const post: AxiosFun = (url, param) => {
+export const post: AxiosFn = (url, param) => {
     return axios.post(url, param).then(res => {
         return res.data;
     }, (err: Error) => {
         // Message.error(err.message);
-        return { code: -1 };
+        return { code: -1, msg: err.message };
     });
 }
 
-export const put: AxiosFun = (url, param) => {
+export const put: AxiosFn = (url, param) => {
     return axios.put(url, param).then(res => {
         return res.data;
     }, (err: Error) => {
         // Message.error(err.message);
-        return { code: -1 };
+        return { code: -1, msg: err.message };
     });
 }
 
-export const del: AxiosFun = (url, param) => {
+export const del: AxiosFn = (url, param) => {
     return axios.delete(url, { data: param }).then(res => {
         return res.data;
     }, (err: Error) => {
         // Message.error(err.message);
-        return { code: -1 };
+        return { code: -1, msg: err.message };
     });
 }
 

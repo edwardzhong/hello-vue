@@ -26,18 +26,18 @@ interface UserState {
 
 type Fn = (arg?: any) => void
 
-type ResData = {
+type ResData<T> = {
     code: number;
-    data: any;
-    msg: string;
+    data?: T;
+    msg?: string;
 }
-interface AxiosFun {
-    (url: string, param?: any): Promise<ResData>
+interface AxiosFn {
+    (url: string, param?: any): Promise<ResData<any>>
 }
 
 export {
     Fn,
-    AxiosFun,
+    AxiosFn,
     UserItem,
     UserList,
     UserState,
