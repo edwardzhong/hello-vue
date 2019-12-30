@@ -28,32 +28,34 @@ module.exports = {
         splitChunks: {
             minSize:100000,
             maxSize:300000,
-            cacheGroups: {
-                vue: {
-                    test: /[\\/]node_modules[\\/](vue|vuex|vue-router)[\\/]/,
-                    chunks: 'initial',
-                    priority: 10,
-                    name: 'base',
-                },
-                // vendors: {
-                //     test: /[\\/]node_modules[\\/]/,
-                //     chunks: 'initial',
-                //     name: 'vendors',
-                // },
-                'async-vendors': {
-                    test: /[\\/]node_modules[\\/]/,
-                    minChunks: 2,
-                    chunks: 'async',
-                    name: 'async-vendors'
-                },
-                styles: {
-                    name: 'styles',
-                    test: /\.css$/,
-                    chunks: 'all',
-                    enforce: true,
-                    priority: 20, 
-                }
-            }
+			cacheGroups: {
+				vue: {
+					test: /[\\/]node_modules[\\/](vue|vuex|vue-router)[\\/]/,
+					chunks: 'initial',
+					priority: 10,
+					name: 'base',
+				},
+				vendors: {
+					test: /[\\/]node_modules[\\/]/,
+					chunks: 'async',
+					priority: 9,
+					minChunks: 2,
+					name: 'vendors',
+				},
+				// common: {
+				// 	name: 'common',
+				// 	chunks: 'initial',
+				// 	priority: 2,
+				// 	minChunks: 2,
+				// },
+				styles: {
+					name: 'styles',
+					test: /\.css$/,
+					chunks: 'all',
+					enforce: true,
+					priority: 20,
+				}
+			}
         }
     },
     module: {
