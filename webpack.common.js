@@ -48,13 +48,13 @@ module.exports = {
 				// 	priority: 2,
 				// 	minChunks: 2,
 				// },
-				styles: {
-					name: 'styles',
-					test: /\.css$/,
-					chunks: 'all',
-					enforce: true,
-					priority: 20,
-				}
+                styles: {
+                    test: /\.css$/,
+                    chunks: 'all',
+                    enforce: true,
+                    priority: 20, 
+                    name: 'styles'
+                }
 			}
         }
     },
