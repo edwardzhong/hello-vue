@@ -35,6 +35,20 @@ axios.interceptors.request.use(config => {
 //     return res.data;
 // });
 
+export const form: AxiosFn = (url, data) => {
+    return axios({
+        headers: { 'Content-Type': 'multipart/form-data;chartset=UTF-8' },
+        method: 'post',
+        url,
+        data
+    }).then(res => {
+        return res.data;
+    }, (err: Error) => {
+        // Message.error(err.message);
+        return { code: -99, msg: err.message };
+    });
+}
+
 export const get: AxiosFn = (url, param) => {
     return axios.get(url, { params: param }).then(res => {
         return res.data;
