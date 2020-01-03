@@ -21,7 +21,18 @@ const routes = [{
 },
 { path: '*', redirect: '/'}]
 
-export default new Router({
+
+const router = new Router({
     mode: "history",
     routes
-})
+});
+
+// 全局权限验证
+// router.beforeEach((to, _, next) => {
+//     if(needLogin.indexOf(to.name)>-1 && !store.getters.isLogin){
+//         next('/login?r=' + to.path);
+//     } else {
+//         next();
+//     }
+// });
+export default router;
