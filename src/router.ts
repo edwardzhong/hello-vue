@@ -30,7 +30,7 @@ const router = new Router({
 // 全局权限验证
 // router.beforeEach((to, _, next) => {
 //     if(needLogin.indexOf(to.name)>-1 && !store.getters.isLogin){
-//         next('/login?r=' + to.path);
+//         next({ path: '/login', query: { r: to.path, ...to.query }});
 //     } else {
 //         next();
 //     }
