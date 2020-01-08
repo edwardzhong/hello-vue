@@ -112,7 +112,7 @@
 //         }
 //         const size = opt ? opt.size : 4;
 //         const fileSize = Math.floor(file.size / 1024);
-//         if (fileSize > 1024 * size) {
+//         if (fileSize > size) {
 //             return resolve({ code: -98, msg: `上传大小不能超过${size}M` });
 //         }
 //         const formData = new FormData();
