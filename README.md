@@ -1,12 +1,14 @@
 # Webpack 4 Quickstart For Vue
 ### Based on the following
+* webpack 4
+* typescript
 * vue
 * vuex
 * vue-router
-* webpack 4
+* axios
+* element-ui
 * pug
 * scss
-* typescript
 
 ### Project setup
 ```
