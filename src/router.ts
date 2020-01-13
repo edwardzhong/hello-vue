@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store';
 // import Home from './components/home.vue'
 // import Users from './components/users.vue'
+import { needLogin } from './config/auth'
 
 //异步加载
 const Home = () => import('./components/home.vue')
@@ -27,12 +29,11 @@ const router = new Router({
     routes
 });
 
-// 全局权限验证
-// router.beforeEach((to, _, next) => {
-//     if(needLogin.indexOf(to.name)>-1 && !store.getters.isLogin){
-//         next({ path: '/login', query: { r: to.path, ...to.query }});
-//     } else {
-//         next();
-//     }
-// });
+//全局拦截
+router.beforeEach((to, _, next) => {
+    if (!store.getters.isLogin && needLogin.find(name => to.path.search(name) > -1))
+        next({ path: '/login', query: { r: to.path, ...to.query } });
+    else
+        next();
+});
 export default router;
