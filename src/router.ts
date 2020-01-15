@@ -31,7 +31,7 @@ const router = new Router({
 
 //全局拦截
 router.beforeEach((to, _, next) => {
-    if (!store.getters.isLogin && needLogin.find(name => to.path.search(name) > -1))
+    if (!store.getters.isLogin && needLogin.some(name => to.path.search(name) > -1))
         next({ path: '/login', query: { r: to.path, ...to.query } });
     else
         next();
