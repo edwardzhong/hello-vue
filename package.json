@@ -10,7 +10,8 @@
   "keywords": [
     "vue",
     "vuex",
-    "typescript"
+    "typescript",
+    "element-ui"
   ],
   "author": "Jeff Zhong",
   "license": "MIT",
