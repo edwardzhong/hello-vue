@@ -4,7 +4,12 @@ import router from './router'
 import store from './store'
 import '../public/index.css'
 import '../public/iconfont.js'
+import { Message, Popover, Dialog, Loading } from 'element-ui';
 
+Vue.use(Popover)
+Vue.use(Dialog)
+Vue.use(Loading)
+Vue.prototype.$message = Message
 Vue.config.productionTip = false
 Vue.directive('focus', {
   inserted: function (el) {
@@ -16,3 +21,4 @@ new Vue({
   store,
   render: h => h(App),
 }).$mount('#app')
+

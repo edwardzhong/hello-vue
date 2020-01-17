@@ -1,1 +1,1 @@
-export const needLogin = ['authorize', 'enter', 'publish', 'manage', 'profile', 'user', 'team']
+export const needLogin = ['authorize', 'enter', 'publish', 'manage', 'profile']

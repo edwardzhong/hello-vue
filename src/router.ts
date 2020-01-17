@@ -12,16 +12,11 @@ const Users = () => import('./components/users.vue')
 Vue.use(Router)
 
 //路由
-const routes = [{
-    path: '/',
-    name: 'home',
-    component: Home
-}, {
-    path: '/users',
-    name: 'users',
-    component: Users
-},
-{ path: '*', redirect: '/'}]
+const routes = [
+    { path: '/', name: 'home', component: Home },
+    { path: '/users', name: 'users', component: Users },
+    { path: '*', redirect: '/' }
+]
 
 
 const router = new Router({
