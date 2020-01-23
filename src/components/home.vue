@@ -35,7 +35,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 
 @Component
-export default class Home extends Vue { };
+export default class Home extends Vue { }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
