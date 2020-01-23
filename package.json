@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "start": "webpack-dev-server --open --config webpack.dev.js",
-    "eslint": "eslint --ext .vue,.js,.ts src/"
+    "eslint": "eslint --fix --ext .vue,.js,.ts src/"
   },
   "keywords": [
     "vue",
