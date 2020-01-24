@@ -36,10 +36,10 @@ interface AxiosFn {
 }
 
 export {
-    Fn,
-    AxiosFn,
-    UserItem,
-    UserList,
-    UserState,
-    RootState,
+  Fn,
+  AxiosFn,
+  UserItem,
+  UserList,
+  UserState,
+  RootState,
 }

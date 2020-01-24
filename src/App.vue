@@ -15,7 +15,7 @@ import { Vue, Component } from 'vue-property-decorator'
 import Modal from "@/components/common/Modal.vue";
 
 @Component({
-	components: { Modal }
+  components: { Modal }
 })
 export default class App extends Vue{ }
 </script>

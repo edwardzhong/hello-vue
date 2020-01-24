@@ -13,22 +13,22 @@ Vue.use(Router)
 
 //路由
 const routes = [
-    { path: '/', name: 'home', component: Home },
-    { path: '/users', name: 'users', component: Users },
-    { path: '*', redirect: '/' }
+  { path: '/', name: 'home', component: Home },
+  { path: '/users', name: 'users', component: Users },
+  { path: '*', redirect: '/' }
 ]
 
 
 const router = new Router({
-    mode: "history",
-    routes
+  mode: "history",
+  routes
 });
 
 //全局拦截
 router.beforeEach((to, _, next) => {
-    if (!store.getters.isLogin && needLogin.some(name => to.path.search(name) > -1))
-        next({ path: '/login', query: { r: to.path, ...to.query } });
-    else
-        next();
+  if (!store.getters.isLogin && needLogin.some(name => to.path.search(name) > -1))
+    next({ path: '/login', query: { r: to.path, ...to.query } });
+  else
+    next();
 });
 export default router;
