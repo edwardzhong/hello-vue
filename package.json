@@ -4,8 +4,8 @@
   "description": "webpack 4 for vue",
   "main": "app",
   "scripts": {
-    "build": "webpack --config webpack.prod.js",
     "start": "webpack-dev-server --open --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
     "eslint": "eslint --fix --ext .vue,.js,.ts src/"
   },
   "keywords": [
