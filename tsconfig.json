@@ -16,7 +16,7 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
-    "allowJs": true,
+    "allowJs": false,
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {
@@ -32,9 +32,7 @@
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "src/**/*.vue"
   ],
   "exclude": [
     "node_modules",
