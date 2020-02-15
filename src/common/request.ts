@@ -32,56 +32,17 @@ axios.interceptors.request.use(config => {
 //             // storage.clear();
 //         }
 //     }
-//     return res.data;
+//     return res;
 // });
 
-export const form: AxiosFn = (url, data) => {
-  return axios({
-    headers: { 'Content-Type': 'multipart/form-data;chartset=UTF-8' },
-    method: 'post',
-    url,
-    data
-  }).then(res => {
-    return res.data;
-  }, (err: Error) => {
-    // Message.error(err.message);
-    return { code: -99, msg: err.message };
-  });
-}
-
-export const get: AxiosFn = (url, param) => {
-  return axios.get(url, { params: param }).then(res => {
-    return res.data;
-  }, (err: Error) => {
-    // Message.error(err.message);
-    return { code: -1, msg: err.message };
-  });
-}
-
-export const post: AxiosFn = (url, param) => {
-  return axios.post(url, param).then(res => {
-    return res.data;
-  }, (err: Error) => {
-    // Message.error(err.message);
-    return { code: -1, msg: err.message };
-  });
-}
-
-export const put: AxiosFn = (url, param) => {
-  return axios.put(url, param).then(res => {
-    return res.data;
-  }, (err: Error) => {
-    // Message.error(err.message);
-    return { code: -1, msg: err.message };
-  });
-}
-
-export const del: AxiosFn = (url, param) => {
-  return axios.delete(url, { data: param }).then(res => {
-    return res.data;
-  }, (err: Error) => {
-    // Message.error(err.message);
-    return { code: -1, msg: err.message };
-  });
-}
+export const form: AxiosFn = (url, data) => axios({
+  headers: { 'Content-Type': 'multipart/form-data;chartset=UTF-8' },
+  method: 'post',
+  url,
+  data
+}).then(res => res.data, (err: Error) => ({ code: -99, msg: err.message }));
+export const get: AxiosFn = (url, param) => axios.get(url, { params: param }).then(res => res.data, (err: Error) => ({ code: -99, msg: err.message }));
+export const post: AxiosFn = (url, param) => axios.post(url, param).then(res => res.data, (err: Error) => ({ code: -99, msg: err.message }));
+export const put: AxiosFn = (url, param) => axios.put(url, param).then(res => res.data, (err: Error) => ({ code: -99, msg: err.message }));
+export const del: AxiosFn = (url, param) => axios.delete(url, { data: param }).then(res => res.data, (err: Error) => ({ code: -99, msg: err.message }));
 
