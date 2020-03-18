@@ -1,23 +1,17 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import Router, { RouteConfig } from 'vue-router'
 import store from './store';
-// import Home from './components/home.vue'
-// import Users from './components/users.vue'
+import pages from './config/page'
 import { needLogin } from './config/auth'
 
 //异步加载
-const Home = () => import('./components/home.vue')
-const Users = () => import('./components/users.vue')
+// const Home = () => import('./components/home.vue')
+// const Users = () => import('./components/users.vue')
 
 Vue.use(Router)
-
 //路由
-const routes = [
-  { path: '/', name: 'home', component: Home },
-  { path: '/users', name: 'users', component: Users },
-  { path: '*', redirect: '/' }
-]
-
+const routes: RouteConfig[] = pages.map(p => ({ path: p.path, name: p.name, component: () => import(`./components/${p.name}.vue`) }))
+routes.push({ path: '*', redirect: '/' });
 
 const router = new Router({
   mode: "history",

@@ -33,7 +33,7 @@
 import { Vue, Component, Watch, Provide } from "vue-property-decorator";
 import { Mutation, Getter, namespace } from "vuex-class";
 import { UserItem, UserList, Fn } from "../type";
-import Dialog from "./common/dialog.vue";
+import Dialog from "./common/Dialog.vue";
 import Popup from "./common/popup.vue";
 
 const userInfo = namespace("user");
