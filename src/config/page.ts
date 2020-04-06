@@ -1,4 +1,4 @@
 export default [
-  { path: '/', name: 'home' },
-  { path: '/users', name: 'users' },
+  { path: '/', name: 'home', isAuth: false },
+  { path: '/users', name: 'users', isAuth: false },
 ]

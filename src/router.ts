@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router, { RouteConfig } from 'vue-router'
 import store from './store';
 import pages from './config/page'
-import { needLogin } from './config/auth'
 
 //异步加载
 // const Home = () => import('./components/home.vue')
@@ -20,7 +19,7 @@ const router = new Router({
 
 //全局拦截
 router.beforeEach((to, _, next) => {
-  if (!store.getters.isLogin && needLogin.some(name => to.path.search(name) > -1))
+  if (!store.getters.isLogin && pages.some(p => p.isAuth && to.path.search(p.name) > -1))
     next({ path: '/login', query: { r: to.path, ...to.query } });
   else
     next();
