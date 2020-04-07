@@ -19,7 +19,7 @@ export default class Dialog extends Vue {
 
     @Emit()
     confirm(){ }
-}
+};
 </script>
 <style lang="scss" scoped>
 .dialog {
@@ -52,4 +52,3 @@ export default class Dialog extends Vue {
     }
 }
 </style>
-
