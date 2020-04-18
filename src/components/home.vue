@@ -1,4 +1,7 @@
 <template lang="pug">
+	mixin Icon(id, classname)
+		svg.icon(class=classname aria-hidden="true")
+			use(xlink:href="#icon-"+id)
 	.hello
 		h1  
 			router-link(to="/users") Go to user list
