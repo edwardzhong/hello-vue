@@ -1,45 +1,45 @@
+type PlainObject = { [P: string]: any };
 
 type LoginInfo = {
-    id: string;
-}
-type SelfInfo = {
-    id: string;
-}
-interface RootState {
-    loginInfo: LoginInfo;
-    selfInfo: SelfInfo;
-    modal: { visible: boolean };
-    msgInfo: { visible: boolean; isError: boolean; txt: string; };
+	id: string;
 }
 
-type UserItem = {
-    id: number;
-    name: string;
-    num: number;
+interface RootState {
+	loginInfo: LoginInfo;
+	modal: { visible: boolean };
+	msgInfo: { visible: boolean; isError: boolean; txt: string; };
+}
+
+type User = {
+	id: number;
+	name: string;
 };
 
-type UserList = Array<UserItem>
-
 interface UserState {
-    list: UserList;
+	list: User[];
 }
-
-type Fn = (arg?: any) => void
 
 type ResData<T> = {
-    code: number;
-    data?: T;
-    msg?: string;
-}
-interface AxiosFn {
-    (url: string, param?: any): Promise<ResData<any>>
+	code: number;
+	data?: T;
+	msg?: string;
 }
 
+interface AxiosFn {
+	(url: string, param?: any): Promise<ResData<any>>
+}
+
+type FileEvent = Event & {
+	target: {
+		files: FileList;
+	};
+};
+
 export {
-  Fn,
-  AxiosFn,
-  UserItem,
-  UserList,
-  UserState,
-  RootState,
+	PlainObject,
+	ResData,
+	AxiosFn,
+	RootState,
+	UserState,
+	User,
 }

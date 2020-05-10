@@ -4,6 +4,8 @@ $blue-deep: #3b5898;
 $green: #32bb01;
 $gray: #dcdfe6;
 $purple: #752e95;
+$minWidth: 1200px;
+$mobileWidth: 768px;
 
 @mixin imgbg {
 	background-repeat: no-repeat;
@@ -26,14 +28,14 @@ $purple: #752e95;
 }
 
 @mixin layout {
-    box-sizing: border-box;
-    margin: 0 auto;
-    width: 90%;
-    min-width: 1000px;
+	box-sizing: border-box;
+	margin: 0 auto;
+	width: 90%;
+	min-width: 1000px;
 }
 
 @mixin sm {
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: $mobileWidth) {
 		@content;
 	}
 }

@@ -17,13 +17,12 @@ if (!info || info === 'undefined') {
 const store: StoreOptions<RootState> = {
   state:{
     loginInfo,
-    selfInfo:{ id: ''},
     modal: { visible: false },
     msgInfo: { visible:false, isError:false, txt:'' },
   },
   getters:{
     visible: state => state.modal.visible,
-    isLogin: state => !!state.selfInfo.id
+    isLogin: state => !!state.loginInfo.id
   },
   mutations:{
     logout(state){
@@ -31,16 +30,8 @@ const store: StoreOptions<RootState> = {
       localStorage.removeItem('loginInfo');
     },
     setLoginInfo(state, payload:{id:string}) {
-      state.selfInfo = payload;
+      state.loginInfo = payload;
       localStorage.setItem("loginInfo", JSON.stringify(payload));
-    },
-    setSelfInfo(state, payload:{id:string}) {
-      state.selfInfo = payload;
-      localStorage.setItem("selfInfo", JSON.stringify(payload));
-    },
-    updateSelfInfo(state, payload:object) {
-      state.selfInfo = Object.assign(state.selfInfo, payload);
-      localStorage.setItem("selfInfo", JSON.stringify(state.selfInfo));
     },
     showModal(state) {
       state.modal.visible = true;

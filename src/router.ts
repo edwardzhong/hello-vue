@@ -9,7 +9,14 @@ import pages from './config/page'
 
 Vue.use(Router)
 //路由
-const routes: RouteConfig[] = pages.map(p => ({ path: p.path, name: p.name, component: () => import(`./components/${p.name}.vue`) }))
+const routes: RouteConfig[] = pages.map(p => {
+  const com: RouteConfig = { path: p.path, name: p.name, component: () => import(`./components/${p.name}.vue`) };
+  if (p.children) {
+    com.children = p.children.map(c => ({ path: c.path, name: c.name, component: () => import(`./components/${c.name}.vue`) }))
+    com.children.push({ path: '*', redirect: p.children[0].name })
+  }
+  return com;
+});
 routes.push({ path: '*', redirect: '/' });
 
 const router = new Router({
@@ -19,7 +26,7 @@ const router = new Router({
 
 //全局拦截
 router.beforeEach((to, _, next) => {
-  if (!store.getters.isLogin && pages.some(p => p.isAuth && to.path.search(p.name) > -1))
+  if (!store.getters.isLogin && pages.some(p => p.isAuth && to.path.search(p.path) > -1))
     next({ path: '/login', query: { r: to.path, ...to.query } });
   else
     next();

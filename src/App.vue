@@ -1,13 +1,6 @@
 <template lang="pug">
-	mixin Icon(id, classname)
-		svg.icon(class=classname aria-hidden="true")
-			use(xlink:href="#icon-"+id)
 	#app
 		Modal
-		img(alt="Vue logo" src="./assets/logo.png")
-		div
-			+Icon('Logo','logo')
-			+Icon('Logo2','logo')
 		router-view
 </template>
 <script lang="ts">
@@ -23,11 +16,5 @@ export default class App extends Vue{ }
 #app {
   height: 100%;
   width: 100%;
-  min-width: 1000px;
-  text-align: center;
-}
-.logo{
-	width: 100px;
-	height: 100px;
 }
 </style>

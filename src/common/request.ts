@@ -10,21 +10,19 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 axios.interceptors.request.use(config => {
   const params = config.method == "get" ? config.params || {} : config.data || {};
   const token = localStorage.getItem("token");
-  if (token) config.headers.Authorization = 'Bearer ' + token;
+  if (token) config.headers.Authorization = token;
   params._t = Math.random();
   return config;
 });
 
 // axios.interceptors.response.use(res => {
-//     if (res.data.code == 200) {
-//         if (res.config.url.search(/\/login\/sign/i) > -1 && res.data.data) {
-//             // storage.save(res.data.data);
-//         }
-//         if (res.config.url.search(/\/login\/signout/i) > -1) {
-//             // storage.clear();
-//         }
-//     }
-//     return res;
+//   if (res.headers.authorization) {
+//     localStorage.setItem('token', res.headers.authorization);
+//   }
+//   if (res.data.code == 403) {
+//     store.commit('logout');
+//   }
+//   return res;
 // });
 
 export const form: AxiosFn = (url, data) => axios({

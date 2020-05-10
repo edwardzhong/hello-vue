@@ -2,7 +2,10 @@
 	mixin Icon(id, classname)
 		svg.icon(class=classname aria-hidden="true")
 			use(xlink:href="#icon-"+id)
-	.hello
+	.home
+		img(alt="Vue logo" src="../assets/logo.png")
+		div
+			+Icon('Logo','logo')
 		h1  
 			router-link(to="/users") Go to user list
 		h2 Welcome to Your Vue.js App
@@ -34,26 +37,28 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import Component from 'vue-class-component'
+import Vue from 'vue';
+import Component from 'vue-class-component';
 
 @Component
-export default class Home extends Vue { }
+export default class Home extends Vue {}
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+.home {
+	text-align: center;
+}
 h3 {
-    margin: 40px 0 0;
+	margin: 40px 0 0;
 }
 ul {
-    list-style-type: none;
-    padding: 0;
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
+	list-style-type: none;
+	padding: 0;
+	li {
+		display: inline-block;
+		margin: 0 10px;
+	}
 }
 a {
-    color: hsl(204, 73%, 46%);
+	color: hsl(204, 73%, 46%);
 }
 </style>

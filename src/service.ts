@@ -1,7 +1,11 @@
-import { get } from './common/request'
+import { get, post } from './common/request'
+import { PlainObject, ResData } from './type';
 
-export const logout = () => get('entrance/logout');
-export const getUserInfo = (arg:string) => get('user/loginInfo',{Authorization:arg});
+type Res<T> = Promise<ResData<T>>;
+type PromiseFn<P, T> = (arg: P) => Res<T>;
 
-// export const userHomeInfo: (id: string) => ServiceRes<UserHomeInfo> = (id) => get(`other/homepage/${id}/baseinfo`)
-// export const userStartActivity = (id: string, type: 0 | 1 | 2, page: number) => get(`other/homepage/${id}/activity/type/${type}/page/${page}`)
+export const check: () => Res<any> = () => get('/check')
+export const login: PromiseFn<{ name: string; password: string }, PlainObject> = arg => post('/login', arg)
+export const logout: () => Res<any> = () => get('/logout');
+export const getList: PromiseFn<PlainObject, PlainObject[]> = arg => get('/list', arg)
+// export const download = (arg: string) => `${api}/download?ids=${arg}`
