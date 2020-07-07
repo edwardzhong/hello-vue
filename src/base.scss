@@ -7,10 +7,12 @@ $purple: #752e95;
 $minWidth: 1200px;
 $mobileWidth: 768px;
 
-@mixin imgbg {
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: 50%;
+@mixin imgCover($url) {
+	background: url($url) no-repeat 50% / cover;
+}
+
+@mixin imgContain($url) {
+	background: url($url) no-repeat 50% / contain;
 }
 
 @mixin nowrap {
@@ -19,11 +21,11 @@ $mobileWidth: 768px;
 	text-overflow: ellipsis;
 }
 
-@mixin nowrapTwo {
+@mixin nowraps($num: 2) {
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	text-overflow: ellipsis;
-	-webkit-line-clamp: 2;
+	-webkit-line-clamp: $num;
 	overflow: hidden;
 }
 
