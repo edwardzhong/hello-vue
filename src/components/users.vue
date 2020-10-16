@@ -15,7 +15,7 @@
         button(class='button button-primary' v-on:click="updateItem(editItem)") confirm
   h1
     router-link(to="/") Go to home
-  table(class="table table-striped table-justified")
+  table(class="table table-striped")
     thead 
       tr 
         th name
@@ -29,13 +29,14 @@
           button(class="button button-primary" v-on:click="openPop(i)") edit 
           button(class="button button-success" v-on:click="openDialog(i.id)") delete
 </template>
+
 <script lang="ts">
 import { Vue, Component, Watch, Provide } from 'vue-property-decorator';
 import { Mutation, Getter, namespace } from 'vuex-class';
 import { User } from '../type';
 import Dialog from './common/Dialog.vue';
 import Popup from './common/popup.vue';
-type Fn = (arg?: any) => void;
+type Fn = (arg ? : any) => void;
 const userInfo = namespace('user');
 
 @Component({
@@ -122,8 +123,8 @@ export default class Users extends Vue {
   }
 }
 </script>
-<style lang="scss">
 
+<style lang="scss">
 /* Button
    ========================================================================== */
 .button {
@@ -308,7 +309,8 @@ a.button-dark {
   filter: alpha(opacity=20);
 }
 
-.close:hover, .close:focus {
+.close:hover,
+.close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
@@ -534,7 +536,6 @@ a.button-dark {
   margin: 1.5em 0 0 11em;
 }
 
-
 .form input.input-rounded,
 .form .input-rounded {
   border-radius: 2em;
@@ -614,6 +615,7 @@ a.button-dark {
   .form button[type="submit"] {
     margin: 0.7em 0 0;
   }
+
   .form input:not([type]),
   .form input[type="text"],
   .form input[type="password"],
@@ -633,6 +635,7 @@ a.button-dark {
     margin-bottom: 0.3em;
     display: block;
   }
+
   .group input:not([type]),
   .group input[type="text"],
   .group input[type="password"],
@@ -650,12 +653,14 @@ a.button-dark {
   .group input[type="color"] {
     margin-bottom: 0;
   }
+
   .form-aligned .control-group label {
     margin-bottom: 0.3em;
     text-align: left;
     display: block;
     width: 100%;
   }
+
   .form-aligned .controls {
     margin: 1.5em 0 0 0;
   }
@@ -664,7 +669,8 @@ a.button-dark {
 /* Panel
    ========================================================================== */
 .table {
-  /* Remove spacing between table cells (from Normalize.css) */
+  width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   border-spacing: 0;
   empty-cells: show;
@@ -679,7 +685,8 @@ a.button-dark {
   text-align: center;
 }
 
-.table td, .table th {
+.table td,
+.table th {
   border-left: 1px solid #cbcbcb;
   border-width: 0 0 0 1px;
   font-size: inherit;
@@ -690,7 +697,8 @@ a.button-dark {
   /* cell padding */
 }
 
-.table td:first-child, .table th:first-child {
+.table td:first-child,
+.table th:first-child {
   border-left-width: 0;
 }
 
@@ -724,23 +732,19 @@ striping:
   border-bottom: 1px solid #cbcbcb;
 }
 
-.table-bordered tbody > tr:last-child > td {
+.table-bordered tbody>tr:last-child>td {
   border-bottom-width: 0;
 }
 
 /* HORIZONTAL BORDERED TABLES */
-.table-horizontal td, .table-horizontal th {
+.table-horizontal td,
+.table-horizontal th {
   border-width: 0 0 1px 0;
   border-bottom: 1px solid #cbcbcb;
 }
 
-.table-horizontal tbody > tr:last-child > td {
+.table-horizontal tbody>tr:last-child>td {
   border-bottom-width: 0;
-}
-
-.table-justified {
-  width: 100%;
-  table-layout: fixed;
 }
 </style>
 <style lang="scss" scoped>
@@ -748,11 +752,14 @@ striping:
   width: 600px;
   margin: 50px auto;
 }
+
 button:not(:last-child) {
   margin-right: 10px;
 }
+
 .head {
   background: #0077e6;
+
   p {
     margin: 0;
     padding-left: 20px;
@@ -762,19 +769,24 @@ button:not(:last-child) {
     @include nowrap;
   }
 }
+
 .form {
   background: #fff;
   text-align: center;
+
   .control-group {
     padding: 10px 20px 0;
   }
+
   input {
     width: 100%;
   }
+
   .foot {
     padding: 14px 20px;
     text-align: right;
   }
+
   button {
     font-size: 12px;
     padding: 8px 20px;

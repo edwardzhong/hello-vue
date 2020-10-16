@@ -1,7 +1,8 @@
 <template lang="pug">
 .popup(:class="{active:show}")
-	slot content
+  slot content
 </template>
+
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator';
 
@@ -11,6 +12,7 @@ export default class Popup extends Vue {
   show: boolean;
 }
 </script>
+
 <style lang="scss" scoped>
 .popup {
   z-index: 100;
@@ -22,11 +24,14 @@ export default class Popup extends Vue {
   top: 150px;
   margin-left: -180px;
   width: 360px;
+  background-color: #fff;
+  border-radius: 4px;
   box-shadow: 0 6px 20px 0 hsla(0, 0%, 0%, 0.19), 0 8px 17px 0 hsla(0, 0%, 0%, 0.2);
   transform-style: preserve-3d;
   backface-visibility: hidden;
   transform: rotateY(-70deg);
   transition: 0.4s ease-in-out;
+
   &.active {
     opacity: 1;
     visibility: visible;
