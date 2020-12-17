@@ -4,15 +4,15 @@ import store from './store';
 import pages from './config/page'
 
 //异步加载
-// const Home = () => import('./components/home.vue')
-// const Users = () => import('./components/users.vue')
+// const Home = () => import('./views/home.vue')
+// const Users = () => import('./views/users.vue')
 
 Vue.use(Router)
 //路由
 const routes: RouteConfig[] = pages.map(p => {
-  const com: RouteConfig = { path: p.path, name: p.name, component: () => import(`./components/${p.name}.vue`) };
+  const com: RouteConfig = { path: p.path, name: p.name, component: () => import(`./views/${p.name}.vue`) };
   if (p.children) {
-    com.children = p.children.map(c => ({ path: c.path, name: c.name, component: () => import(`./components/${c.name}.vue`) }))
+    com.children = p.children.map(c => ({ path: c.path, name: c.name, component: () => import(`./views/${c.name}.vue`) }))
     com.children.push({ path: '*', redirect: p.children[0].name })
   }
   return com;

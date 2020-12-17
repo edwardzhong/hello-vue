@@ -4,13 +4,13 @@
 		router-view
 </template>
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
-import Modal from "@/components/common/Modal.vue";
+import { Vue, Component } from "vue-property-decorator";
+import Modal from "@/views/components/Modal.vue";
 
 @Component({
-  components: { Modal }
+  components: { Modal },
 })
-export default class App extends Vue{ }
+export default class App extends Vue {}
 </script>
 <style type="text/css">
 #app {

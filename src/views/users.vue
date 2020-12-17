@@ -31,13 +31,13 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Watch, Provide } from 'vue-property-decorator';
-import { Mutation, Getter, namespace } from 'vuex-class';
-import { User } from '../type';
-import Dialog from './common/Dialog.vue';
-import Popup from './common/popup.vue';
-type Fn = (arg ? : any) => void;
-const userInfo = namespace('user');
+import { Vue, Component, Watch, Provide } from "vue-property-decorator";
+import { Mutation, Getter, namespace } from "vuex-class";
+import { User } from "../type";
+import Dialog from "./components/Dialog.vue";
+import Popup from "./components/popup.vue";
+type Fn = (arg?: any) => void;
+const userInfo = namespace("user");
 
 @Component({
   components: {
@@ -58,11 +58,11 @@ export default class Users extends Vue {
   @userInfo.Mutation update: Fn;
 
   // @userInfo.Mutation init:Fn
-  @Mutation('init', { namespace: 'user' })
+  @Mutation("init", { namespace: "user" })
   init: Fn;
 
   // @userInfo.Getter list: User[];
-  @Getter('list', { namespace: 'user' })
+  @Getter("list", { namespace: "user" })
   list: Fn;
   // @Getter list:User[]
   // @Getter('list') getterList:User[]
@@ -73,14 +73,14 @@ export default class Users extends Vue {
   created() {
     if (this.list.length) return;
     this.init([
-      { id: 1, name: 'Alex', num: 10000 },
-      { id: 2, name: 'Bob', num: 9000 },
-      { id: 3, name: 'David', num: 7000 },
-      { id: 4, name: 'Edward', num: 8000 },
+      { id: 1, name: "Alex", num: 10000 },
+      { id: 2, name: "Bob", num: 9000 },
+      { id: 3, name: "David", num: 7000 },
+      { id: 4, name: "Edward", num: 8000 },
     ]);
   }
 
-  @Watch('list', { immediate: true, deep: true })
+  @Watch("list", { immediate: true, deep: true })
   listUpdate(val: User[], oldVal: User[]) {
     console.log(val, oldVal);
     if (val.length) {
@@ -150,7 +150,7 @@ export default class Users extends Vue {
   /*IE 6/7/8*/
   border: none rgba(0, 0, 0, 0);
   /*IE9 + everything else*/
-  background-color: #E6E6E6;
+  background-color: #e6e6e6;
   text-decoration: none;
   border-radius: 2px;
 }
@@ -176,9 +176,13 @@ export default class Users extends Vue {
 .button-hover,
 .button:hover,
 .button:focus {
-  opacity: .9;
+  opacity: 0.9;
   filter: alpha(opacity=90);
-  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0.2));
+  background-image: linear-gradient(
+    transparent,
+    rgba(0, 0, 0, 0.1) 40%,
+    rgba(0, 0, 0, 0.2)
+  );
 }
 
 .button:focus {
@@ -200,7 +204,7 @@ export default class Users extends Vue {
 .button-disabled:active {
   border: none;
   background-image: none;
-  opacity: .4;
+  opacity: 0.4;
   filter: alpha(opacity=40);
   cursor: not-allowed;
   box-shadow: none;
@@ -305,7 +309,7 @@ a.button-dark {
   line-height: 1;
   color: #000;
   text-shadow: 0 1px 0 #fff;
-  opacity: .2;
+  opacity: 0.2;
   filter: alpha(opacity=20);
 }
 
@@ -314,7 +318,7 @@ a.button-dark {
   color: #000;
   text-decoration: none;
   cursor: pointer;
-  opacity: .5;
+  opacity: 0.5;
   filter: alpha(opacity=50);
 }
 
@@ -732,7 +736,7 @@ striping:
   border-bottom: 1px solid #cbcbcb;
 }
 
-.table-bordered tbody>tr:last-child>td {
+.table-bordered tbody > tr:last-child > td {
   border-bottom-width: 0;
 }
 
@@ -743,7 +747,7 @@ striping:
   border-bottom: 1px solid #cbcbcb;
 }
 
-.table-horizontal tbody>tr:last-child>td {
+.table-horizontal tbody > tr:last-child > td {
   border-bottom-width: 0;
 }
 </style>
