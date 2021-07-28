@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import '../public/normalize.css'
 import '../public/index.css'
 import '../public/iconfont.js'
 import { Message, Popover, Dialog, Loading } from 'element-ui';
