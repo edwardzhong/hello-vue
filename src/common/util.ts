@@ -28,7 +28,7 @@ function stringFormat(str: string, ...args: any[]): string {
   });
 }
 
-export const formatDate = (date: Date) => {
+function formatDate (date: Date) {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -272,6 +272,7 @@ function shareUrl(type: string, opts: ShareArg): string {
 export {
   deepCopy,
   stringFormat,
+  formatDate,
   formatTime,
   htmlEncode,
   htmlDecode,
